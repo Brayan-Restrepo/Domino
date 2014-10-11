@@ -12,7 +12,7 @@ package estructuras;
 public class Reglas {
     
     public void ponerFichaAdelante(){
-        
+         
     }
     
     public void ponerFichaAtras(){
