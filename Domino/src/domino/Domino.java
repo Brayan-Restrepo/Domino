@@ -77,25 +77,34 @@ public class Domino {
     public void repartirFicha(){
         Random r = new Random();
         for (int i = 0; i < 28; ) {
-            double n =  r.nextDouble()*100;
-            if(n>=0&&n<28){
-                System.out.println(n);
-                i++;
+            int n = (int) (r.nextDouble()*100);
+            if(n>0&&n<29){
+                if(this.probarRepeticion(n-1)){
+                    this.fichaRepartidas[i] = n-1;
+                    i++;
+                    System.out.println("----> "+(n-1)+i);
+                }
             }
         }   
     }
     
     /**
-     * 
-     * @param n 
+     * @autor Brayan Restrepo
+     * @param n es el numero aleatorio para comprovar si la existe en el vector
      * @vercion 1.0 13/10/2014
      */
-    public void probarRepeticion(int n){
+    public boolean  probarRepeticion(int n){
         
+        for (int i = 0; i < this.fichaRepartidas.length; i++) {
+            if(n==this.fichaRepartidas[i]){
+                return false;
+            }
+        }
+        return true;
     }
     public static void main(String[] args) {
         Domino d = new Domino();
-        
+        d.repartirFicha();
         d.imprimirLista(d.getListaFicha());
     }
 
