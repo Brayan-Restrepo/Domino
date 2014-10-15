@@ -102,10 +102,17 @@ public class Domino {
         }
         return true;
     }
+    /**
+     * @autor Brayan Restrepo
+     * @nomber main: metodo temporal solo para hacer pruebas
+     * @param args 
+     * @vercion 1.0 14/10/2014
+     */
     public static void main(String[] args) {
         Domino d = new Domino();
         d.repartirFicha();
         d.imprimirLista(d.getListaFicha());
+        
     }
 
 }
