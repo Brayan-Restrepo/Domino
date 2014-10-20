@@ -19,7 +19,7 @@ public class Domino {
     private ArrayList<Ficha> listaFichaHumano;
     private ArrayList<Ficha> listaFichaPc;
     private ArrayList<Ficha> listaTablero;
-    private int[] fichasBarajadas;
+    private int[] fichaRepartidas;
     
     /**
      * @autor Brayan Restrepo Crea todo el domino en la lista de Fichas
@@ -32,12 +32,7 @@ public class Domino {
         this.listaFichaHumano = new ArrayList<Ficha>();
         this.listaFichaPc = new ArrayList<Ficha>();
         this.listaTablero = new ArrayList<Ficha>();
-        this.fichasBarajadas = new int[28];
-        
-        //relleno el vector con -1 para evitar futuros problemas al barajar
-        for (int i = 0; i < this.fichasBarajadas.length; i++) {
-            this.fichasBarajadas[i] = -1;
-        }
+        this.fichaRepartidas = new int[28];
             
         //Crea todo el domino en la lista de Fichas "listaFicha"
         for (int i = 0; i < 7; i++) {
@@ -76,23 +71,21 @@ public class Domino {
     
     /**
      * @autor Brayan Restrepo
-     * Barajar las fichas
-     * @vercion 1.1 15/10/2014
+     * 
+     * @vercion 1.0 13/10/2014
      */
-    public void barajarFicha(){
+    public void repartirFicha(){
         Random r = new Random();
-        int i = 0;
-        do {
-            int n = (int)Math.floor(Math.random()*28);
-            if(n<28){
-                if(this.probarRepeticion(n)){
-                    this.fichasBarajadas[i] = n;
-                    System.out.println(i+" ----> "+this.fichasBarajadas[i]);
+        for (int i = 0; i < 28; ) {
+            int n = (int) (r.nextDouble()*100);
+            if(n>0&&n<29){
+                if(this.probarRepeticion(n-1)){
+                    this.fichaRepartidas[i] = n-1;
                     i++;
+                    System.out.println("----> "+(n-1)+i);
                 }
             }
-        }while(i<28);
-        
+        }   
     }
     
     /**
@@ -102,30 +95,13 @@ public class Domino {
      */
     public boolean  probarRepeticion(int n){
         
-        for (int i = 0; i < this.fichasBarajadas.length; i++) {
-            if(n==this.fichasBarajadas[i]){
+        for (int i = 0; i < this.fichaRepartidas.length; i++) {
+            if(n==this.fichaRepartidas[i]){
                 return false;
             }
         }
         return true;
     }
-    
-    /**
-     * @autor Brayan Restrepo
-     * Repartir las fichas a pc y humano
-     * @vercion 1.0 15/10/2014
-     */
-    public void repartirFichas(){
-        for (int i = 0; i < 14; i+=2) {
-            this.listaFichaPc.add(this.listaFicha.get(this.fichasBarajadas[i]));
-            this.listaFichaHumano.add(this.listaFicha.get(this.fichasBarajadas[i+1]));
-        }
-        //Eliminar las fichas repartidas
-        for (int i = 0; i < 14; i++) {
-            this.listaFicha.remove(i);
-        }
-    }
-    
     /**
      * @autor Brayan Restrepo
      * @nomber main: metodo temporal solo para hacer pruebas
@@ -134,15 +110,9 @@ public class Domino {
      */
     public static void main(String[] args) {
         Domino d = new Domino();
-        d.barajarFicha();
+        d.repartirFicha();
         d.imprimirLista(d.getListaFicha());
-        d.repartirFichas();
-        System.out.println("Humano");
-        d.imprimirLista(d.getListaFichaHumano());
-        System.out.println("PC");
-        d.imprimirLista(d.getListaFichaPc());
-        System.out.println("Fichas Maso");
-        d.imprimirLista(d.getListaFicha());
+        
     }
 
 }
