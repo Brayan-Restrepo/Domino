@@ -90,7 +90,6 @@ public class Domino {
             if (n < 28) {
                 if (this.probarRepeticion(n)) {
                     this.fichasBarajadas[i] = n;
-                    System.out.println(i + " ----> " + this.fichasBarajadas[i]);
                     i++;
                 }
             }
@@ -211,16 +210,14 @@ public class Domino {
         d.imprimirLista(d.getListaFicha());
         Scanner s = new Scanner(System.in);
         do {
-            System.out.println("Precione 1 para robar");
+            System.out.println("Presione 1 para robar");
             int i = s.nextInt();
             if (i == 1){
                 d.robarFicha(true);
-                System.out.println("FIHA ROBADA HUMANO");
+                System.out.println("FICHA ROBADA HUMANO");
                 d.imprimirLista(d.getListaFichaHumano());
             }
         } while (true);
-        
-
     }
 
 }
