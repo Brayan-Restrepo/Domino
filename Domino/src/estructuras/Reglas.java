@@ -11,6 +11,10 @@ package estructuras;
  */
 public class Reglas {
     
+    public void empezarPartida(){
+        
+    }
+    
     public void ponerFichaAdelante(){
          
     }

@@ -19,6 +19,7 @@ public class Ficha {
 
     /**
      * @autor Brayan Restrepo
+     * Automaticamente me busca la ruta de la ficha bacano.
      * @param cola
      * @param cabeza 
      * @vercion 1.0
