@@ -184,30 +184,29 @@ public class Domino {
      */
     public static void main(String[] args) {
         Domino d = new Domino();
-        Reglas r = new Reglas();
-        Scanner s = new Scanner(System.in);
-        d.barajarFicha();
-        d.repartirFichas();
-        do {
-            System.out.println("Humano presione el numero de ficha que desea Poner: ");
-            d.imprimirLista(Domino.listaFichaHumano);
-            int ficha = s.nextInt();
-            Domino.listaTablero.add(new Ficha(Domino.listaFichaHumano.get(ficha).getCabeza(),Domino.listaFichaHumano.get(ficha).getCola()));
-            Domino.listaFichaHumano.remove(ficha);
-            System.out.println("Lista Tablero");
-            d.imprimirLista(Domino.listaTablero);
-            
-            System.out.println("PC presione el numero de ficha que desea Poner: ");
-            d.imprimirLista(Domino.listaFichaPc);
-            int fichaPC = s.nextInt();
-            Domino.listaTablero.add(new Ficha(Domino.listaFichaPc.get(fichaPC).getCabeza(),Domino.listaFichaPc.get(fichaPC).getCola()));
-            Domino.listaFichaPc.remove(fichaPC);
-            System.out.println("Lista Tablero");
-            d.imprimirLista(Domino.listaTablero);
-        } while (true);
+//        Scanner s = new Scanner(System.in);
+//        d.barajarFicha();
+//        d.repartirFichas();
+//        do {
+//            System.out.println("Humano presione el numero de ficha que desea Poner: ");
+//            d.imprimirLista(Domino.listaFichaHumano);
+//            int ficha = s.nextInt();
+//            Domino.listaTablero.add(new Ficha(Domino.listaFichaHumano.get(ficha).getCabeza(),Domino.listaFichaHumano.get(ficha).getCola()));
+//            Domino.listaFichaHumano.remove(ficha);
+//            System.out.println("Lista Tablero");
+//            d.imprimirLista(Domino.listaTablero);
+//            
+//            System.out.println("PC presione el numero de ficha que desea Poner: ");
+//            d.imprimirLista(Domino.listaFichaPc);
+//            int fichaPC = s.nextInt();
+//            Domino.listaTablero.add(new Ficha(Domino.listaFichaPc.get(fichaPC).getCabeza(),Domino.listaFichaPc.get(fichaPC).getCola()));
+//            Domino.listaFichaPc.remove(fichaPC);
+//            System.out.println("Lista Tablero");
+//            d.imprimirLista(Domino.listaTablero);
+//        } while (true);
         
         
-        /*
+        
         d.barajarFicha();
         d.imprimirLista(Domino.listaFicha);
         d.repartirFichas();
@@ -223,19 +222,12 @@ public class Domino {
             int i = s.nextInt();
             if (i == 1){
                 d.robarFicha(true);
-<<<<<<< HEAD
                 System.out.println("FIHA ROBADA HUMANO");
                 d.imprimirLista(Domino.listaFichaHumano);
             }
         } while (true);
-        */
+        
 
-=======
-                System.out.println("FICHA ROBADA HUMANO");
-                d.imprimirLista(d.getListaFichaHumano());
-            }
-        } while (true);
->>>>>>> 49836f146be8b872c7a2ed737862e5a823a48c60
     }
 
 }
