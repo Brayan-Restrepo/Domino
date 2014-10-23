@@ -75,7 +75,6 @@ public class Domino {
             if (n < 28) {
                 if (this.probarRepeticion(n)) {
                     this.fichasBarajadas[i] = n;
-                    System.out.println(i + " ----> " + this.fichasBarajadas[i]);
                     i++;
                 }
             }
@@ -220,16 +219,23 @@ public class Domino {
         d.imprimirLista(Domino.listaFicha);
         Scanner s = new Scanner(System.in);
         do {
-            System.out.println("Precione 1 para robar");
+            System.out.println("Presione 1 para robar");
             int i = s.nextInt();
             if (i == 1){
                 d.robarFicha(true);
+<<<<<<< HEAD
                 System.out.println("FIHA ROBADA HUMANO");
                 d.imprimirLista(Domino.listaFichaHumano);
             }
         } while (true);
         */
 
+=======
+                System.out.println("FICHA ROBADA HUMANO");
+                d.imprimirLista(d.getListaFichaHumano());
+            }
+        } while (true);
+>>>>>>> 49836f146be8b872c7a2ed737862e5a823a48c60
     }
 
 }
