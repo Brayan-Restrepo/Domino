@@ -15,10 +15,11 @@ import java.util.Scanner;
  */
 public class Domino {
 
-    private ArrayList<Ficha> listaFicha;
-    private ArrayList<Ficha> listaFichaHumano;
-    private ArrayList<Ficha> listaFichaPc;
-    private ArrayList<Ficha> listaTablero;
+    public static ArrayList<Ficha> listaFicha = new ArrayList<Ficha>();
+    public static ArrayList<Ficha> listaFichaHumano = new ArrayList<Ficha>();
+    public static ArrayList<Ficha> listaFichaPc = new ArrayList<Ficha>();
+    public static ArrayList<Ficha> listaTablero = new ArrayList<Ficha>();
+    
     private int[] fichasBarajadas;
 
     /**
@@ -27,12 +28,12 @@ public class Domino {
      * @vercion 1.0 13/10/2014
      */
     public Domino() {
-
+        /*
         this.listaFicha = new ArrayList<Ficha>();
         this.listaFichaHumano = new ArrayList<Ficha>();
         this.listaFichaPc = new ArrayList<Ficha>();
         this.listaTablero = new ArrayList<Ficha>();
-        
+        */
         this.fichasBarajadas = new int[28];
 
         //relleno el vector con -1 para evitar futuros problemas al barajar
@@ -46,22 +47,6 @@ public class Domino {
                 this.listaFicha.add(new Ficha(i, j));
             }
         }
-    }
-
-    public ArrayList<Ficha> getListaFicha() {
-        return listaFicha;
-    }
-
-    public ArrayList<Ficha> getListaFichaHumano() {
-        return listaFichaHumano;
-    }
-
-    public ArrayList<Ficha> getListaFichaPc() {
-        return listaFichaPc;
-    }
-
-    public ArrayList<Ficha> getListaTablero() {
-        return listaTablero;
     }
 
     /**
@@ -200,15 +185,39 @@ public class Domino {
      */
     public static void main(String[] args) {
         Domino d = new Domino();
+        Reglas r = new Reglas();
+        Scanner s = new Scanner(System.in);
         d.barajarFicha();
-        d.imprimirLista(d.getListaFicha());
+        d.repartirFichas();
+        do {
+            System.out.println("Humano presione el numero de ficha que desea Poner: ");
+            d.imprimirLista(Domino.listaFichaHumano);
+            int ficha = s.nextInt();
+            Domino.listaTablero.add(new Ficha(Domino.listaFichaHumano.get(ficha).getCabeza(),Domino.listaFichaHumano.get(ficha).getCola()));
+            Domino.listaFichaHumano.remove(ficha);
+            System.out.println("Lista Tablero");
+            d.imprimirLista(Domino.listaTablero);
+            
+            System.out.println("PC presione el numero de ficha que desea Poner: ");
+            d.imprimirLista(Domino.listaFichaPc);
+            int fichaPC = s.nextInt();
+            Domino.listaTablero.add(new Ficha(Domino.listaFichaPc.get(fichaPC).getCabeza(),Domino.listaFichaPc.get(fichaPC).getCola()));
+            Domino.listaFichaPc.remove(fichaPC);
+            System.out.println("Lista Tablero");
+            d.imprimirLista(Domino.listaTablero);
+        } while (true);
+        
+        
+        /*
+        d.barajarFicha();
+        d.imprimirLista(Domino.listaFicha);
         d.repartirFichas();
         System.out.println("Humano");
-        d.imprimirLista(d.getListaFichaHumano());
+        d.imprimirLista(Domino.listaFichaHumano);
         System.out.println("PC");
-        d.imprimirLista(d.getListaFichaPc());
+        d.imprimirLista(Domino.listaFichaPc);
         System.out.println("Fichas Maso");
-        d.imprimirLista(d.getListaFicha());
+        d.imprimirLista(Domino.listaFicha);
         Scanner s = new Scanner(System.in);
         do {
             System.out.println("Precione 1 para robar");
@@ -216,10 +225,10 @@ public class Domino {
             if (i == 1){
                 d.robarFicha(true);
                 System.out.println("FIHA ROBADA HUMANO");
-                d.imprimirLista(d.getListaFichaHumano());
+                d.imprimirLista(Domino.listaFichaHumano);
             }
         } while (true);
-        
+        */
 
     }
 
