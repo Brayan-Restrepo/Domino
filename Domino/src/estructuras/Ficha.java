@@ -5,13 +5,13 @@
  */
 package estructuras;
 
-import javax.swing.Icon;
+import interfaz.BotonFicha;
 
 /**
  *
  * @author Brayan
  */
-public class Ficha {
+public class Ficha extends BotonFicha{
     
     private  int cola;
     private  int cabeza;
@@ -25,13 +25,17 @@ public class Ficha {
      * @vercion 1.0
      */
     public Ficha(int cabeza, int cola) {
+        super("/Imagenes/"+cabeza+"-"+cola+".jpg");
         this.cola = cola;
         this.cabeza = cabeza;
-        if(cola>cabeza){
-            this.rutaFicha = "/Imagenes/"+this.cabeza+"-"+this.cola+".jpg";
-        }else{
-            this.rutaFicha = "/Imagenes/"+this.cola+"-"+this.cabeza+".jpg";
-        }
+        
+        /*
+            if(cola>cabeza){
+                this.rutaFicha = "/Imagenes/"+this.cabeza+"-"+this.cola+".jpg";
+            }else{
+                this.rutaFicha = "/Imagenes/"+this.cola+"-"+this.cabeza+".jpg";
+            }
+        */
     }
 
     public int getCola() {

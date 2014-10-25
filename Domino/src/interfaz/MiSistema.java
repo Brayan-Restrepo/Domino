@@ -29,14 +29,13 @@ public class MiSistema {
      */
     public void Nuevo_Objeto()
     {
-       
-        BotonFicha tmp = new BotonFicha( "1-5");
+        BotonFicha bF = new BotonFicha( "1-5");
         //coloca al objeto creado en una posicion aleatoria
-        tmp.setLocation( rndNum( this.contenedor.getWidth() - tmp.getWidth() )  , rndNum(this.contenedor.getHeight()-tmp.getHeight() ) );        
+        bF.setLocation(rndNum(this.contenedor.getWidth() - bF.getWidth() )  , rndNum(this.contenedor.getHeight()-bF.getHeight() ) );        
         //agrega el objeto en el MAP
-        map.put("1+5", tmp );        
+        map.put("1+5", bF );        
         //agrega el objeto en el JPanel
-        this.contenedor.add(tmp);
+        this.contenedor.add(bF);
         //actualiza graficos
         this.contenedor.repaint();
     }
@@ -48,9 +47,9 @@ public class MiSistema {
     /*
     public void Cambiar_Imagen( String key )
     {
-        MiObjeto tmp = (MiObjeto) map.get( key );
-        tmp.setIcon( new ImageIcon(getClass().getResource("/org/bolivia/app/res/" + ((int) Math.floor(Math.random()*4+1))+ ".png")) ); 
-        tmp.repaint();
+        MiObjeto bF = (MiObjeto) map.get( key );
+        bF.setIcon( new ImageIcon(getClass().getResource("/org/bolivia/app/res/" + ((int) Math.floor(Math.random()*4+1))+ ".png")) ); 
+        bF.repaint();
     }
     */
      
