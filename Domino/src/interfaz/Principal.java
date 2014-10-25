@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import domino.Domino;
+
 /**
  *
  * @author Brayan
@@ -70,7 +72,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablero);
         tablero.getAccessibleContext().setAccessibleDescription("");
 
-        jButton1.setText("COGER FICHA");
+        jButton1.setText("REINICIAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -108,7 +110,16 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.ms.Nuevo_Objeto();
+        this.tablero.removeAll();
+        this.tablero.add(this.jSeparator1);
+        Domino.listaFichaHumano.clear();
+        Domino.listaFichaPc.clear();
+        Domino.listaFicha.clear();
+        Domino.listaTablero.clear();
+        Domino d = new Domino();
+        d.barajarFicha();
+        d.repartirFichas();
+        this.ms.colocarFichaHumano();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

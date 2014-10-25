@@ -28,7 +28,7 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
     /** Posicion de imagen */
     private Point posicion = new Point(0,0);
     /** Tamaño de imagen */
-    private Dimension d = new Dimension(124,150);    
+    private Dimension d = new Dimension(90,150);    
     /** variable que sirve para calcular el movimiento del objeto */
     private Point start_loc;
     /** variable que sirve para calcular el movimiento del objeto */
@@ -43,14 +43,12 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
      * 
      * @param key 
      */
-    public BotonFicha(String key ){        
+    public BotonFicha(String ruta ){        
         //se inician propiedades de objeto
-        this.key = key;
-        this.setToolTipText( key );
         this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));        
         this.setSize(d);
         this.setPreferredSize(d);          
-        this.setIcon( new ImageIcon(getClass().getResource("/Imagenes/1-5.jpg"))); 
+        this.setIcon( new ImageIcon(getClass().getResource(ruta))); 
         this.setText("");
         this.setVisible( true );
         this.setLocation( posicion );
