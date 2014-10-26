@@ -5,7 +5,7 @@
  */
 package domino;
 
-import estructuras.Ficha;
+import interfaz.BotonFicha;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,10 +15,10 @@ import java.util.Scanner;
  */
 public class Domino {
 
-    public static ArrayList<Ficha> listaFicha = new ArrayList<Ficha>();
-    public static ArrayList<Ficha> listaFichaHumano = new ArrayList<Ficha>();
-    public static ArrayList<Ficha> listaFichaPc = new ArrayList<Ficha>();
-    public static ArrayList<Ficha> listaTablero = new ArrayList<Ficha>();
+    public static ArrayList<BotonFicha> listaFicha = new ArrayList<BotonFicha>();
+    public static ArrayList<BotonFicha> listaFichaHumano = new ArrayList<BotonFicha>();
+    public static ArrayList<BotonFicha> listaFichaPc = new ArrayList<BotonFicha>();
+    public static ArrayList<BotonFicha> listaTablero = new ArrayList<BotonFicha>();
     
     private int[] fichasBarajadas;
 
@@ -40,21 +40,24 @@ public class Domino {
         for (int i = 0; i < this.fichasBarajadas.length; i++) {
             this.fichasBarajadas[i] = -1;
         }
+    }
 
+    
+    public void crearDomino(){
         //Crea todo el domino en la lista de Fichas "listaFicha"
         for (int i = 0; i < 7; i++) {
             for (int j = i; j < 7; j++) {
-                this.listaFicha.add(new Ficha(i, j));
+                this.listaFicha.add(new BotonFicha(i,j));
             }
         }
     }
-
+    
     /**
      * @autor Brayan Restrepo Imprime los datos Cabeza y Cola de una lista tipo
      * Ficha
      * @param lista
      */
-    public void imprimirLista(ArrayList<Ficha> lista) {
+    public void imprimirLista(ArrayList<BotonFicha> lista) {
         for (int i = 0; i < lista.size(); i++) {
             System.out.println(i+")  "+lista.get(i).getCabeza() + " - " + lista.get(i).getCola());
         }
@@ -103,10 +106,16 @@ public class Domino {
      * @vercion 2.0 21/10/2014
      */
     public void repartirFichas(){
+        int k=10;
         for (int i = 0; i < 14; i+=2) {
             System.out.println(this.fichasBarajadas[i]+"\n"+this.fichasBarajadas[i+1]);
             this.listaFichaPc.add(this.listaFicha.get(this.fichasBarajadas[i]));
             this.listaFichaHumano.add(this.listaFicha.get(this.fichasBarajadas[i+1]));
+            int tlh = Domino.listaFichaHumano.size();
+            if(tlh!=1){
+                int x = Domino.listaFichaHumano.get(tlh-2).getX() + 90;
+                Domino.listaFichaHumano.get(tlh-1).posiocion(x, 850);
+            }
         }
         
         //Areglo auxiliar
@@ -167,9 +176,11 @@ public class Domino {
             int cola = this.listaFicha.get(n).getCola();
             this.listaFicha.remove(n);
             if(humano){
-                this.listaFichaHumano.add(new Ficha(cabeza,cola));
+                int x = Domino.listaFichaHumano.get(Domino.listaFichaHumano.size()-1).getX();
+                this.listaFichaHumano.add(new BotonFicha(cabeza,cola));
+                Domino.listaFichaHumano.get(Domino.listaFichaHumano.size()-1).posiocion(x+90, 850);
             }else{
-                this.listaFichaPc.add(new Ficha(cabeza, cola));
+                this.listaFichaPc.add(new BotonFicha(cabeza, cola));
             }
         }else{
             System.out.println("No hay fichas para robar");
@@ -206,7 +217,7 @@ public class Domino {
 //        } while (true);
         
         
-        
+        d.crearDomino();
         d.barajarFicha();
         d.imprimirLista(Domino.listaFicha);
         d.repartirFichas();
@@ -222,6 +233,8 @@ public class Domino {
             int i = s.nextInt();
             if (i == 1){
                 d.robarFicha(true);
+                System.out.println("Fichas maso");
+                d.imprimirLista(Domino.listaFicha);
                 System.out.println("FIHA ROBADA HUMANO");
                 d.imprimirLista(Domino.listaFichaHumano);
             }

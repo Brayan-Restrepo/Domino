@@ -23,10 +23,9 @@ import javax.swing.JButton;
  */
 public class BotonFicha extends JButton implements MouseListener, MouseMotionListener{
     
-    /** Identificador de objeto */
-    private String key = "";    
+     
     /** Posicion de imagen */
-    private Point posicion = new Point(0,0);
+    protected Point posicion = new Point(10,850);
     /** Tamaño de imagen */
     private Dimension d = new Dimension(90,150);    
     /** variable que sirve para calcular el movimiento del objeto */
@@ -39,16 +38,27 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
     private int nuevo_X = 1;
     private int nuevo_Y = 1;
     
+    //------------------
+    private int x=10;
+    private int y=850;
+    private int cola;
+    private int cabeza;
+    private String rutaFicha;
+    
+    
     /**
      * 
      * @param key 
      */
-    public BotonFicha(String ruta ){        
+    public BotonFicha(int cabeza,int cola){
+        this.rutaFicha="/Imagenes/"+cabeza+"-"+cola+".jpg";
+        this.cola = cola;
+        this.cabeza = cabeza;
         //se inician propiedades de objeto
         this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));        
         this.setSize(d);
         this.setPreferredSize(d);          
-        this.setIcon( new ImageIcon(getClass().getResource(ruta))); 
+        this.setIcon( new ImageIcon(getClass().getResource(this.rutaFicha))); 
         this.setText("");
         this.setVisible( true );
         this.setLocation( posicion );
@@ -57,14 +67,64 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
         this.addMouseMotionListener(this);
         
     }
-    public String getKey() {
-        return key;
+    
+    //-----------------
+    
+    public void posiocion(int x,int y){
+        this.x = x;
+        this.y = y;
+        this.posicion = new Point(x,y);
+        super.setLocation( this.posicion );        
+    }
+//    public void posiocion(){
+//        this.posicion = new Point(this.x,this.y);
+//        this.setLocation( this.posicion );        
+//    }
+    public int getX(){
+        return this.x;
+    }
+    
+    public int getY(){
+        return this.y;
+    }
+    
+    public void setX(int x){
+        this.x=x;
+    }
+    
+    public void setY(int y){
+        this.y=y;
+    }
+    
+    
+    public int getCola() {
+        return cola;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setCola(int cola) {
+        this.cola = cola;
     }
 
+    public int getCabeza() {
+        return cabeza;
+    }
+
+    public void setCabeza(int cabeza) {
+        this.cabeza = cabeza;
+    }
+
+    public String getRutaFicha() {
+        return rutaFicha;
+    }
+
+    public void setRutaFicha(String rutaFicha) {
+        this.rutaFicha = rutaFicha;
+    }
+    
+        
+    //--------------
+    
+    
     @Override
     public void mouseClicked(MouseEvent e) {}
 
@@ -78,7 +138,7 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
     public void mouseReleased(MouseEvent e) {          
         nuevo_X = (this.getLocation().x);
         nuevo_Y = (this.getLocation().y);
-        this.setLocation( nuevo_X, nuevo_Y );
+        this.posiocion( nuevo_X, nuevo_Y );
     }
 
     @Override
@@ -95,8 +155,10 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
     public void mouseDragged(MouseEvent e) {
       Point current = this.getScreenLocation(e);
       offset = new Point((int) current.getX() - (int) start_drag.getX(),(int) current.getY() - (int) start_drag.getY());
-      Point new_location = new Point((int) (this.start_loc.getX() + offset.getX()), (int) (this.start_loc.getY() + offset.getY()));
-      this.setLocation(new_location);          
+      
+      this.x=(int) (this.start_loc.getX() + offset.getX());
+      this.y=(int) (this.start_loc.getY() + offset.getY());
+      this.posiocion(x, y);         
     }
 
     @Override

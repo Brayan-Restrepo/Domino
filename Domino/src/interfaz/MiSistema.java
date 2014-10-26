@@ -29,11 +29,10 @@ public class MiSistema {
      * Metodo que crea un nuevo objeto
      */
     public void colocarFichaHumano(){
-        int k=10;
         for (int i = 0; i < Domino.listaFichaHumano.size(); i++) {
             //coloca al objeto creado en una posicion
-            Domino.listaFichaHumano.get(i).setLocation( k, 550 );
-            k+=90;
+//            Domino.listaFichaHumano.get(i).setLocation( k, 850 );
+//            k+=90;
             this.tablero.add(Domino.listaFichaHumano.get(i));
         }        
         //actualiza graficos
