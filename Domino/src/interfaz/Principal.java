@@ -73,9 +73,9 @@ public class Principal extends javax.swing.JFrame {
         tableroLayout.setVerticalGroup(
             tableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tableroLayout.createSequentialGroup()
-                .addGap(435, 435, 435)
+                .addGap(393, 393, 393)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(553, Short.MAX_VALUE))
+                .addContainerGap(595, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(tablero);
@@ -203,7 +203,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
+    public static javax.swing.JSeparator jSeparator1;
     public static javax.swing.JPanel tablero;
     // End of variables declaration//GEN-END:variables
 }

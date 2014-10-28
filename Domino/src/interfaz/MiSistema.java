@@ -30,6 +30,8 @@ public class MiSistema {
      */
     public void colocarFichaHumano(){
         Principal.tablero.removeAll();
+        Principal.jSeparator1.setLocation(0, 800);
+        Principal.tablero.add(Principal.jSeparator1);
         int k=10;
         for (int i = 0; i < Domino.listaFichaHumano.size(); i++) {
             //coloca al objeto creado en una posicion
