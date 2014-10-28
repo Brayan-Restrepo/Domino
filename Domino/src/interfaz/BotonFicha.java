@@ -143,8 +143,10 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
         if(nuevo_Y<800){
             mst.buscarBoton(this.getName(), Domino.listaFichaHumano);
             mst.colocarFichaHumano();
+            mst.colocarFichaTablero();
         }else{
             mst.colocarFichaHumano();
+            mst.colocarFichaTablero();
         }
     }
 

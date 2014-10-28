@@ -52,8 +52,20 @@ public class MiSistema {
             System.out.println("NOMBRE BOTON "+lista.get(i).getName()   );
         } while (!lista.get(i).getName().equals(nambre));
         Principal.tablero.remove(Domino.listaFichaHumano.get(i));
+        Domino.listaTablero.add(Domino.listaFichaHumano.get(i));
         Domino.listaFichaHumano.remove(i);
         Principal.tablero.repaint();
+    }
+    
+    public void colocarFichaTablero(){
+        int k =250;
+        for (int i = 0; i < Domino.listaTablero.size(); i++) {
+            Principal.tablero.remove(Domino.listaTablero.get(i));
+            Domino.listaTablero.get(i).posiocion(k, 500);
+            Principal.tablero.add(Domino.listaTablero.get(i));
+            k+=90;
+            
+        }
     }
     
     /**
