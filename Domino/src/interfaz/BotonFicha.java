@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import domino.Domino;
+import domino.Operaciones;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -44,7 +46,7 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
     private int cola;
     private int cabeza;
     private String rutaFicha;
-    
+    private MiSistema mst = new MiSistema();
     
     /**
      * 
@@ -133,12 +135,17 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
        this.start_drag = getScreenLocation(e);
        this.start_loc = this.getLocation();
     }
-
+    
     @Override
     public void mouseReleased(MouseEvent e) {          
         nuevo_X = (this.getLocation().x);
         nuevo_Y = (this.getLocation().y);
-        this.posiocion( nuevo_X, nuevo_Y );
+        if(nuevo_Y<800){
+            mst.buscarBoton(this.getName(), Domino.listaFichaHumano);
+            mst.colocarFichaHumano();
+        }else{
+            mst.colocarFichaHumano();
+        }
     }
 
     @Override
@@ -158,7 +165,7 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
       
       this.x=(int) (this.start_loc.getX() + offset.getX());
       this.y=(int) (this.start_loc.getY() + offset.getY());
-      this.posiocion(x, y);         
+      this.posiocion(x, y);       
     }
 
     @Override

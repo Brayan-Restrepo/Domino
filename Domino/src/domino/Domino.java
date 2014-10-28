@@ -19,7 +19,7 @@ public class Domino {
     public static ArrayList<BotonFicha> listaFichaHumano = new ArrayList<BotonFicha>();
     public static ArrayList<BotonFicha> listaFichaPc = new ArrayList<BotonFicha>();
     public static ArrayList<BotonFicha> listaTablero = new ArrayList<BotonFicha>();
-    
+    public static int turno;//turno 0 es de la maquina turno 1 humano
     private int[] fichasBarajadas;
 
     /**
@@ -34,6 +34,7 @@ public class Domino {
         this.listaFichaPc = new ArrayList<Ficha>();
         this.listaTablero = new ArrayList<Ficha>();
         */
+        this.turno=0;
         this.fichasBarajadas = new int[28];
 
         //relleno el vector con -1 para evitar futuros problemas al barajar
@@ -47,7 +48,8 @@ public class Domino {
         //Crea todo el domino en la lista de Fichas "listaFicha"
         for (int i = 0; i < 7; i++) {
             for (int j = i; j < 7; j++) {
-                this.listaFicha.add(new BotonFicha(i,j));
+                Domino.listaFicha.add(new BotonFicha(i,j));
+                Domino.listaFicha.get(Domino.listaFicha.size()-1).setName(i+"-"+j);
             }
         }
     }
@@ -108,7 +110,6 @@ public class Domino {
     public void repartirFichas(){
         int k=10;
         for (int i = 0; i < 14; i+=2) {
-            System.out.println(this.fichasBarajadas[i]+"\n"+this.fichasBarajadas[i+1]);
             this.listaFichaPc.add(this.listaFicha.get(this.fichasBarajadas[i]));
             this.listaFichaHumano.add(this.listaFicha.get(this.fichasBarajadas[i+1]));
             int tlh = Domino.listaFichaHumano.size();
@@ -167,25 +168,28 @@ public class Domino {
      * roba una ficha para humano si el parametro es true y para la maquina en 
      * caso contrario
      * @param humano 
-     * @vercion 1.0 21/10/2014
+     * @vercion 2.0 21/10/2014
      */
     public void robarFicha(boolean humano){
         if (this.listaFicha.size()!=0){
             int n = (int) Math.floor(Math.random() * this.listaFicha.size());
-            int cabeza = this.listaFicha.get(n).getCabeza();
-            int cola = this.listaFicha.get(n).getCola();
-            this.listaFicha.remove(n);
+//            int cabeza = this.listaFicha.get(n).getCabeza();
+//            int cola = this.listaFicha.get(n).getCola();
+//            this.listaFicha.remove(n);
             if(humano){
                 int x = Domino.listaFichaHumano.get(Domino.listaFichaHumano.size()-1).getX();
-                this.listaFichaHumano.add(new BotonFicha(cabeza,cola));
+                this.listaFichaHumano.add(this.listaFicha.get(n));
                 Domino.listaFichaHumano.get(Domino.listaFichaHumano.size()-1).posiocion(x+90, 850);
             }else{
-                this.listaFichaPc.add(new BotonFicha(cabeza, cola));
+                this.listaFichaPc.add(this.listaFicha.get(n));
             }
+            this.listaFicha.remove(n);
         }else{
             System.out.println("No hay fichas para robar");
         }
     }
+    
+    
     
     /**
      * @autor Brayan Restrepo

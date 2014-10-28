@@ -18,11 +18,12 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      */
     public Principal() {
-        System.out.println(this.getSize());
         initComponents();
-        ms  = new MiSistema(this.tablero);
+        ms  = new MiSistema();
+        this.tablero.add(this.jSeparator1);
+        this.jSeparator1.setLocation(0, 840);
         this.setExtendedState(MAXIMIZED_BOTH);
-        System.out.println(this.getSize());
+        System.out.println(this.tablero.getSize());
     }
 
     /**
@@ -129,7 +130,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.tablero.removeAll();
         this.tablero.add(this.jSeparator1);
-        
+        this.jSeparator1.setLocation(0, 840);
         Domino.listaFichaHumano.clear();
         Domino.listaFichaPc.clear();
         Domino.listaFicha.clear();
@@ -203,6 +204,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JPanel tablero;
+    public static javax.swing.JPanel tablero;
     // End of variables declaration//GEN-END:variables
 }
