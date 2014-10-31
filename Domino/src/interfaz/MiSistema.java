@@ -45,26 +45,63 @@ public class MiSistema {
         Principal.tablero.repaint();
     }
     
-    public void buscarBoton(String nambre,ArrayList<BotonFicha> lista){
-        int i=-1;
+    
+    /**
+     * Busca el Boton en la lista 
+     * @param nambre
+     * @param lista 
+     */
+    public int buscarBoton(String nambre, ArrayList<BotonFicha> lista){
+        int i=-1; 
         do {
             i++;
-            System.out.println("NOMBRE BOTON "+lista.get(i).getName()   );
         } while (!lista.get(i).getName().equals(nambre));
-        Principal.tablero.remove(Domino.listaFichaHumano.get(i));
-        Domino.listaTablero.add(Domino.listaFichaHumano.get(i));
-        Domino.listaFichaHumano.remove(i);
-        Principal.tablero.repaint();
+        return i;
     }
     
+    /**
+     *Añande una ficha a la lista tablero en la pocicion N 
+     * lo elimina del tablero (JPanel)
+     * la añade a la Lista listaTablero, y finalmente lo elimina de listaHumano
+     * @param n 
+     */
+    public void addFichaTablero(int n,boolean fin){
+        Principal.tablero.remove(Domino.listaFichaHumano.get(n));
+        if(fin){
+            int k;
+            if(Domino.listaTablero.size()==0){
+                k=0;
+            }else{
+                k= Domino.listaTablero.get(Domino.listaTablero.size()-1).getNivel()+1;
+                System.out.println("------> "+k);
+            }
+            Domino.listaTablero.add(Domino.listaFichaHumano.get(n));
+            Domino.listaTablero.get(Domino.listaTablero.size()-1).setNivel(k);
+        }else{
+            int k;
+            if(Domino.listaTablero.size()==0){
+                k=0;
+            }else{
+                k = Domino.listaTablero.get(0).getNivel()-1;
+            }
+            Domino.listaTablero.add(0,Domino.listaFichaHumano.get(n));
+            Domino.listaTablero.get(0).setNivel(k);
+        }
+            
+        Domino.listaFichaHumano.remove(n);
+        Principal.tablero.repaint();
+    }
     public void colocarFichaTablero(){
-        int k =250;
+        int centro = 1000+(90*Domino.listaTablero.get(0).getNivel());
         for (int i = 0; i < Domino.listaTablero.size(); i++) {
             Principal.tablero.remove(Domino.listaTablero.get(i));
-            Domino.listaTablero.get(i).posiocion(k, 500);
+            int cabeza = Domino.listaTablero.get(i).getCabeza();
+            int cola = Domino.listaTablero.get(i).getCola();
+            Domino.listaTablero.get(i).imagenBotonHorizontal(cabeza, cola);
+            Domino.listaTablero.get(i).posiocion(centro, 500);
             Principal.tablero.add(Domino.listaTablero.get(i));
-            k+=90;
-            
+            centro+=90;
+            System.out.println("NIVEL  :   "+Domino.listaTablero.get(i).getNivel());
         }
     }
     

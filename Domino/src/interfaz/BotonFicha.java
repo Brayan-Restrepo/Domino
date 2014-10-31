@@ -6,9 +6,9 @@
 package interfaz;
 
 import domino.Domino;
-import domino.Operaciones;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -47,13 +47,24 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
     private int cabeza;
     private String rutaFicha;
     private MiSistema mst = new MiSistema();
+    private int nivel;
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+    
     
     /**
      * 
      * @param key 
      */
     public BotonFicha(int cabeza,int cola){
-        this.rutaFicha="/Imagenes/"+cabeza+"-"+cola+".jpg";
+        this.rutaFicha="/Imagenes/"+cabeza+"-"+cola+"(v).jpg";
+        this.nivel=0;
         this.cola = cola;
         this.cabeza = cabeza;
         //se inician propiedades de objeto
@@ -71,6 +82,11 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
     }
     
     //-----------------
+    
+    public void imagenBotonHorizontal(int cabeza,int cola){
+        this.rutaFicha="/Imagenes/"+cabeza+"-"+cola+"(h).jpg";
+        this.setIcon( new ImageIcon(getClass().getResource(this.rutaFicha)));
+    }
     
     public void posiocion(int x,int y){
         this.x = x;
@@ -140,11 +156,16 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
     public void mouseReleased(MouseEvent e) {          
         nuevo_X = (this.getLocation().x);
         nuevo_Y = (this.getLocation().y);
-        if(nuevo_Y<800){
-            mst.buscarBoton(this.getName(), Domino.listaFichaHumano);
+        if(nuevo_Y<800){//Poner Ficha
+            int k = mst.buscarBoton(this.getName(),Domino.listaFichaHumano);
+            if(nuevo_X<1000){
+                mst.addFichaTablero(k, false);
+            }else{
+                mst.addFichaTablero(k, true);
+            }
             mst.colocarFichaHumano();
             mst.colocarFichaTablero();
-        }else{
+        }else{//No pone Ficha
             mst.colocarFichaHumano();
             mst.colocarFichaTablero();
         }
