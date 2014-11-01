@@ -8,25 +8,16 @@ import javax.swing.JPanel;
 import domino.*;
 import java.util.ArrayList;
 /**
- * @web http://www.jc-mouse.net/
- * @author Mouse
+ * @autor Jonathan Acosta
  */
 public class MiSistema {
 
-    /** Los objetos se almacenaran en un MAP */
-//    private Map map = new HashMap();   
-    /** JPanel */
-    
-    /** Constructor de clase 
-     * @param JPanel Donde se colocaran los objetos
-     * @param DefaultListModel Aqui se almacenaran los key (identificadores) de objetos
-     */
-    
-    
-    
-    
     /**
-     * Metodo que crea un nuevo objeto
+     * @autor Brayan Restrepo
+     * Remueve todos los objetos del panel tablero y añade las fichas del 
+     * Humano al Jpanel Tablero
+     * 
+     * @vercion 1.0 27/10/2014
      */
     public void colocarFichaHumano(){
         Principal.tablero.removeAll();
@@ -34,9 +25,6 @@ public class MiSistema {
         Principal.tablero.add(Principal.jSeparator1);
         int k=10;
         for (int i = 0; i < Domino.listaFichaHumano.size(); i++) {
-            //coloca al objeto creado en una posicion
-//            Domino.listaFichaHumano.get(i).setLocation( k, 850 );
-//            k+=90;
             Domino.listaFichaHumano.get(i).posiocion(k, 850);
             Principal.tablero.add(Domino.listaFichaHumano.get(i));
             k+=90;
@@ -48,7 +36,7 @@ public class MiSistema {
     
     /**
      * Busca el Boton en la lista 
-     * @param nambre
+     * @param nambre Nombre 
      * @param lista 
      */
     public int buscarBoton(String nambre, ArrayList<BotonFicha> lista){
@@ -60,24 +48,24 @@ public class MiSistema {
     }
     
     /**
-     *Añande una ficha a la lista tablero en la pocicion N 
-     * lo elimina del tablero (JPanel)
-     * la añade a la Lista listaTablero, y finalmente lo elimina de listaHumano
-     * @param n 
+     * Añande una ficha a la lista tablero en la pocicion N 
+     * lo elimina del tablero (JPanel), y finalmente lo elimina de listaHumano
+     * @param n la posicion de la ficha Humano en la lista
+     * @param fin true añande la ficha a la cola y false añade en cabeza
+     * @Vercion 2.0 31/10/2014
      */
-    public void addFichaTablero(int n,boolean fin){
+    public void addFichaTableroHumano(int n,boolean fin){
         Principal.tablero.remove(Domino.listaFichaHumano.get(n));
-        if(fin){
+        if(fin){//Añade ficha en la ultima pocicion
             int k;
             if(Domino.listaTablero.size()==0){
                 k=0;
             }else{
                 k= Domino.listaTablero.get(Domino.listaTablero.size()-1).getNivel()+1;
-                System.out.println("------> "+k);
             }
             Domino.listaTablero.add(Domino.listaFichaHumano.get(n));
             Domino.listaTablero.get(Domino.listaTablero.size()-1).setNivel(k);
-        }else{
+        }else{//Añade ficha en la primera posicion.
             int k;
             if(Domino.listaTablero.size()==0){
                 k=0;
@@ -86,37 +74,28 @@ public class MiSistema {
             }
             Domino.listaTablero.add(0,Domino.listaFichaHumano.get(n));
             Domino.listaTablero.get(0).setNivel(k);
-        }
-            
+        } 
         Domino.listaFichaHumano.remove(n);
         Principal.tablero.repaint();
     }
+    
+    
+    /**
+     * Coloca todas las fichas de la listaTablero en el Jpanel tablero o 
+     * mapa de Juego
+     */
     public void colocarFichaTablero(){
-        int centro = 1000+(90*Domino.listaTablero.get(0).getNivel());
+        int centro = 1000+(145*Domino.listaTablero.get(0).getNivel());
         for (int i = 0; i < Domino.listaTablero.size(); i++) {
             Principal.tablero.remove(Domino.listaTablero.get(i));
             int cabeza = Domino.listaTablero.get(i).getCabeza();
             int cola = Domino.listaTablero.get(i).getCola();
             Domino.listaTablero.get(i).imagenBotonHorizontal(cabeza, cola);
+            Domino.listaTablero.get(i).setSize(145,85);
             Domino.listaTablero.get(i).posiocion(centro, 500);
             Principal.tablero.add(Domino.listaTablero.get(i));
-            centro+=90;
-            System.out.println("NIVEL  :   "+Domino.listaTablero.get(i).getNivel());
+            centro+=145;
         }
     }
-    
-    /**
-     * Metodo que cambia la imagen actual de un objeto por otra imagen aleatoria
-     * @param String Key identificador de objeto
-     */
-    /*
-    public void Cambiar_Imagen( String key )
-    {
-        MiObjeto bF = (MiObjeto) map.get( key );
-        bF.setIcon( new ImageIcon(getClass().getResource("/org/bolivia/app/res/" + ((int) Math.floor(Math.random()*4+1))+ ".png")) ); 
-        bF.repaint();
-    }
-    */
-     
     
 }//->fin de clase

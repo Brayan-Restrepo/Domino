@@ -142,12 +142,6 @@ public class Principal extends javax.swing.JFrame {
         
         this.ms.colocarFichaHumano();
         this.tablero.repaint();
-        d.imprimirLista(Domino.listaFicha);
-        System.out.println("Humano");
-        d.imprimirLista(Domino.listaFichaHumano);
-        System.out.println("Pc");
-        d.imprimirLista(Domino.listaFichaPc);
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
