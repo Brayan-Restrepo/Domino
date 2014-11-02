@@ -1,4 +1,5 @@
 package interfaz;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,6 +20,17 @@ public class MiSistema {
      * 
      * @vercion 1.0 27/10/2014
      */
+    public static int parSalida = 6;
+    public static int turno=1;
+
+    
+    
+    
+    /**
+     * @autor Brayan Restrepo
+     * Colocar las Fichas Del Humano en el maso (Siempre se debe estar llamando)
+     * @vercion 1.1
+     */
     public void colocarFichaHumano(){
         Principal.tablero.removeAll();
         Principal.jSeparator1.setLocation(0, 800);
@@ -35,7 +47,7 @@ public class MiSistema {
     
     
     /**
-     * Busca el Boton en la lista 
+     * Busca el Boton Por su nombre en la lista 
      * @param nambre Nombre 
      * @param lista 
      */
@@ -56,6 +68,7 @@ public class MiSistema {
      */
     public void addFichaTableroHumano(int n,boolean fin){
         Principal.tablero.remove(Domino.listaFichaHumano.get(n));
+        MiSistema.turno = 0;
         if(fin){//Añade ficha en la ultima pocicion
             int k;
             if(Domino.listaTablero.size()==0){
@@ -90,7 +103,7 @@ public class MiSistema {
             Principal.tablero.remove(Domino.listaTablero.get(i));
             int cabeza = Domino.listaTablero.get(i).getCabeza();
             int cola = Domino.listaTablero.get(i).getCola();
-            Domino.listaTablero.get(i).imagenBotonHorizontal(cabeza, cola);
+            Domino.listaTablero.get(i).imagenBotonHorizontal(cola,cabeza);
             Domino.listaTablero.get(i).setSize(145,85);
             Domino.listaTablero.get(i).posiocion(centro, 500);
             Principal.tablero.add(Domino.listaTablero.get(i));

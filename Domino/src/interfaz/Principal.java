@@ -131,6 +131,10 @@ public class Principal extends javax.swing.JFrame {
         this.tablero.removeAll();
         this.tablero.add(this.jSeparator1);
         this.jSeparator1.setLocation(0, 840);
+        
+        MiSistema.parSalida = 6;
+        MiSistema.turno = 1;
+        
         Domino.listaFichaHumano.clear();
         Domino.listaFichaPc.clear();
         Domino.listaFicha.clear();
@@ -143,16 +147,15 @@ public class Principal extends javax.swing.JFrame {
         this.ms.colocarFichaHumano();
         this.tablero.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        d.robarFicha(true);
-        this.tablero.add(Domino.listaFichaHumano.get(Domino.listaFichaHumano.size()-1));
-        this.tablero.repaint();
-        System.out.println("Maso");
-        d.imprimirLista(Domino.listaFicha);
-        System.out.println("Humano");
-        d.imprimirLista(Domino.listaFichaHumano);
+        if(Domino.listaTablero.size()!=0&&MiSistema.turno==1){
+            d.robarFicha(true);
+            this.tablero.add(Domino.listaFichaHumano.get(Domino.listaFichaHumano.size()-1));
+            this.tablero.repaint();
+        }
+            MiSistema.turno=1;
+            MiSistema.parSalida--;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
