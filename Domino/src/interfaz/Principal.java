@@ -6,6 +6,7 @@
 package interfaz;
 
 import domino.Domino;
+import domino.Reglas;
 
 /**
  *
@@ -17,13 +18,13 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    public Reglas r = new Reglas();
     public Principal() {
         initComponents();
         ms  = new MiSistema();
         this.tablero.add(this.jSeparator1);
         this.jSeparator1.setLocation(0, 840);
         this.setExtendedState(MAXIMIZED_BOTH);
-        System.out.println(this.tablero.getSize());
     }
 
     /**
@@ -133,7 +134,7 @@ public class Principal extends javax.swing.JFrame {
         this.jSeparator1.setLocation(0, 840);
         
         MiSistema.parSalida = 6;
-        MiSistema.turno = 1;
+        MiSistema.turno = 0;
         
         Domino.listaFichaHumano.clear();
         Domino.listaFichaPc.clear();
@@ -143,19 +144,35 @@ public class Principal extends javax.swing.JFrame {
         d.crearDomino();
         d.barajarFicha();
         d.repartirFichas();
-        
+        System.out.println("Lista Fichas de PC");
+        d.imprimirLista(Domino.listaFichaPc);
         this.ms.colocarFichaHumano();
         this.tablero.repaint();
+        System.out.println("Turno: "+MiSistema.turno);
+        r.jugar();
+        System.out.println("Turno: "+MiSistema.turno);
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+    private boolean pasar = false;
+
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
         if(Domino.listaTablero.size()!=0&&MiSistema.turno==1){
             d.robarFicha(true);
             this.tablero.add(Domino.listaFichaHumano.get(Domino.listaFichaHumano.size()-1));
             this.tablero.repaint();
         }
-            MiSistema.turno=1;
+        if(Domino.listaTablero.size()==0){
+            MiSistema.turno=0;
+        }
+        if (Domino.listaFicha.size()==0) {
+            if (this.pasar) {
+                MiSistema.turno=0;
+            }
+            this.pasar=true;
+        }
             MiSistema.parSalida--;
+            r.jugar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

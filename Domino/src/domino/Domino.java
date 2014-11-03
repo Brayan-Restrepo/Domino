@@ -170,20 +170,20 @@ public class Domino {
      * @param humano 
      * @vercion 2.0 21/10/2014
      */
-    public void robarFicha(boolean humano){
-        if (this.listaFicha.size()!=0){
-            int n = (int) Math.floor(Math.random() * this.listaFicha.size());
+    public static void robarFicha(boolean humano){
+        if (Domino.listaFicha.size()!=0){
+            int n = (int) Math.floor(Math.random() * Domino.listaFicha.size());
 //            int cabeza = this.listaFicha.get(n).getCabeza();
 //            int cola = this.listaFicha.get(n).getCola();
 //            this.listaFicha.remove(n);
             if(humano){
                 int x = Domino.listaFichaHumano.get(Domino.listaFichaHumano.size()-1).getX();
-                this.listaFichaHumano.add(this.listaFicha.get(n));
+                Domino.listaFichaHumano.add(Domino.listaFicha.get(n));
                 Domino.listaFichaHumano.get(Domino.listaFichaHumano.size()-1).posiocion(x+90, 850);
             }else{
-                this.listaFichaPc.add(this.listaFicha.get(n));
+                Domino.listaFichaPc.add(Domino.listaFicha.get(n));
             }
-            this.listaFicha.remove(n);
+            Domino.listaFicha.remove(n);
         }else{
             System.out.println("No hay fichas para robar");
         }

@@ -60,14 +60,15 @@ public class MiSistema {
     }
     
     /**
+     * @autor Brayan REstrepo
+     * GENERICO
      * Añande una ficha a la lista tablero en la pocicion N 
      * lo elimina del tablero (JPanel), y finalmente lo elimina de listaHumano
      * @param n la posicion de la ficha Humano en la lista
-     * @param fin true añande la ficha a la cola y false añade en cabeza
-     * @Vercion 2.0 31/10/2014
+     * @param fin true añande la ficha al final ......*
+     * @Vercion 2.1 31/10/2014
      */
-    public void addFichaTableroHumano(int n,boolean fin){
-        Principal.tablero.remove(Domino.listaFichaHumano.get(n));
+    public ArrayList<BotonFicha> addFichaTablero(int n,boolean fin,ArrayList<BotonFicha> lista){
         MiSistema.turno = 0;
         if(fin){//Añade ficha en la ultima pocicion
             int k;
@@ -76,7 +77,7 @@ public class MiSistema {
             }else{
                 k= Domino.listaTablero.get(Domino.listaTablero.size()-1).getNivel()+1;
             }
-            Domino.listaTablero.add(Domino.listaFichaHumano.get(n));
+            Domino.listaTablero.add(lista.get(n));
             Domino.listaTablero.get(Domino.listaTablero.size()-1).setNivel(k);
         }else{//Añade ficha en la primera posicion.
             int k;
@@ -85,11 +86,12 @@ public class MiSistema {
             }else{
                 k = Domino.listaTablero.get(0).getNivel()-1;
             }
-            Domino.listaTablero.add(0,Domino.listaFichaHumano.get(n));
+            Domino.listaTablero.add(0,lista.get(n));
             Domino.listaTablero.get(0).setNivel(k);
         } 
-        Domino.listaFichaHumano.remove(n);
+        lista.remove(n);
         Principal.tablero.repaint();
+        return lista;
     }
     
     

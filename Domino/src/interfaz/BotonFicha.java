@@ -6,9 +6,9 @@
 package interfaz;
 
 import domino.Domino;
+import domino.Reglas;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,6 +16,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -50,7 +51,7 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
      */
     private int nuevo_X = 1;
     private int nuevo_Y = 1;
-
+    public Reglas r = new Reglas();
     //------------------
     private int x = 10;
     private int y = 850;
@@ -164,15 +165,12 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
         nuevo_X = (this.getLocation().x);
         nuevo_Y = (this.getLocation().y);
         int k = mst.buscarBoton(this.getName(), Domino.listaFichaHumano);
-        if (Domino.listaTablero.size() != 0) {
-
-            System.out.println("Lista Cola cabeza :" + Domino.listaTablero.get(0).getCabeza() + " cola " + Domino.listaTablero.get(0).getCola());
-        }
         if (MiSistema.turno == 1) {
 
             if (Domino.listaTablero.size() == 0) {//Si no han puesto Fichas
                 if (this.cabeza == MiSistema.parSalida && MiSistema.parSalida == this.cola) {
-                    mst.addFichaTableroHumano(k, true);//Añade Ficha al listaTablero
+                    Principal.tablero.remove(Domino.listaFichaHumano.get(k));
+                    Domino.listaFichaHumano = mst.addFichaTablero(k, true,Domino.listaFichaHumano);//Añade Ficha al listaTablero
                 }
             } else if (nuevo_Y < 800) {//Poner Ficha
 
@@ -181,19 +179,22 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
                         int z = this.cola;
                         this.cola = this.cabeza;
                         this.cabeza = z;
-                        mst.addFichaTableroHumano(k, false);//Añade Ficha al listaTablero
+                        Principal.tablero.remove(Domino.listaFichaHumano.get(k));
+                        Domino.listaFichaHumano = mst.addFichaTablero(k, false,Domino.listaFichaHumano);//Añade Ficha al listaTablero
                     } else if (this.cabeza == Domino.listaTablero.get(0).getCola()) {
-                        mst.addFichaTableroHumano(k, false);//Añade Ficha al listaTablero
+                        Principal.tablero.remove(Domino.listaFichaHumano.get(k));
+                        Domino.listaFichaHumano = mst.addFichaTablero(k, false,Domino.listaFichaHumano);//Añade Ficha al listaTablero
                     }
                 } else {//Pone la ficha en Cabeza 
                     if (this.cola == Domino.listaTablero.get(Domino.listaTablero.size() - 1).getCabeza()) {
-
-                        mst.addFichaTableroHumano(k, true);//Añade Ficha al listaTablero
+                        Principal.tablero.remove(Domino.listaFichaHumano.get(k));
+                        Domino.listaFichaHumano = mst.addFichaTablero(k, true,Domino.listaFichaHumano);//Añade Ficha al listaTablero
                     } else if (this.cabeza == Domino.listaTablero.get(Domino.listaTablero.size() - 1).getCabeza()) {
-                        int z= this.cabeza;
+                        int z = this.cabeza;
                         this.cabeza = this.cola;
                         this.cola = z;
-                        mst.addFichaTableroHumano(k, true);//Añade Ficha al listaTablero
+                        Principal.tablero.remove(Domino.listaFichaHumano.get(k));
+                        Domino.listaFichaHumano = mst.addFichaTablero(k, true,Domino.listaFichaHumano);//Añade Ficha al listaTablero
                     }
                 }
             }
@@ -201,6 +202,11 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
         mst.colocarFichaHumano();
         if (Domino.listaTablero.size() != 0) {
             mst.colocarFichaTablero();
+        }
+        if (Domino.listaFichaHumano.size()==0) {
+            JOptionPane.showMessageDialog(null, "Gano Humano");
+        }else{
+            r.jugar();
         }
     }
 
