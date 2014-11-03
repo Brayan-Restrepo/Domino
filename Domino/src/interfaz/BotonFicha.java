@@ -97,6 +97,11 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
         this.rutaFicha = "/Imagenes/" + cola + "-" + cabeza + "(h).jpg";
         this.setIcon(new ImageIcon(getClass().getResource(this.rutaFicha)));
     }
+    
+    public void imagenBotonVertical(int cola, int cabeza) {
+        this.rutaFicha = "/Imagenes/" + cola + "-" + cabeza + "(v).jpg";
+        this.setIcon(new ImageIcon(getClass().getResource(this.rutaFicha)));
+    }
 
     public void posiocion(int x, int y) {
         this.x = x;

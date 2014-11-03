@@ -105,11 +105,19 @@ public class MiSistema {
             Principal.tablero.remove(Domino.listaTablero.get(i));
             int cabeza = Domino.listaTablero.get(i).getCabeza();
             int cola = Domino.listaTablero.get(i).getCola();
-            Domino.listaTablero.get(i).imagenBotonHorizontal(cola,cabeza);
-            Domino.listaTablero.get(i).setSize(145,85);
-            Domino.listaTablero.get(i).posiocion(centro, 500);
-            Principal.tablero.add(Domino.listaTablero.get(i));
-            centro+=145;
+            if(cabeza!=cola){
+                Domino.listaTablero.get(i).imagenBotonHorizontal(cola,cabeza);
+                Domino.listaTablero.get(i).setSize(145,85);
+                Domino.listaTablero.get(i).posiocion(centro, 500);
+                Principal.tablero.add(Domino.listaTablero.get(i));
+                centro+=145;
+            }else{
+                Domino.listaTablero.get(i).imagenBotonVertical(cola,cabeza);
+                Domino.listaTablero.get(i).setSize(85,145);
+                Domino.listaTablero.get(i).posiocion(centro, 465);
+                Principal.tablero.add(Domino.listaTablero.get(i));
+                centro+=85;
+            }
         }
     }
     
