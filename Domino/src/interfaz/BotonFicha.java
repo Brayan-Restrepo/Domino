@@ -29,11 +29,11 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
     /**
      * Posicion de imagen
      */
-    protected Point posicion = new Point(10, 850);
+    protected Point posicion = new Point(10, 433);
     /**
      * Tamaño de imagen
      */
-    private Dimension d = new Dimension(90, 150);
+    private Dimension d = new Dimension(62, 124);
     /**
      * variable que sirve para calcular el movimiento del objeto
      */
@@ -54,13 +54,24 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
     public Reglas r = new Reglas();
     //------------------
     private int x = 10;
-    private int y = 850;
+    private int y = 433;
     private int cola;
     private int cabeza;
     private String rutaFicha;
     private MiSistema mst = new MiSistema();
     private int nivel;
 
+    private int prioridad ;
+
+    public int getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(int prioridad) {
+        this.prioridad = prioridad;
+    }
+    
+    
     public int getNivel() {
         return nivel;
     }
@@ -74,10 +85,11 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
      * @param key
      */
     public BotonFicha(int cabeza, int cola) {
-        this.rutaFicha = "/Imagenes/" + cabeza + "-" + cola + "(v).jpg";
+        this.rutaFicha = "/Imagenes/" + cabeza + "-" + cola + "v.png";
         this.nivel = 0;
         this.cola = cola;
         this.cabeza = cabeza;
+        this.prioridad = -1;
         //se inician propiedades de objeto
         this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.setSize(d);
@@ -94,12 +106,12 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
 
     //-----------------
     public void imagenBotonHorizontal(int cola, int cabeza) {
-        this.rutaFicha = "/Imagenes/" + cola + "-" + cabeza + "(h).jpg";
+        this.rutaFicha = "/Imagenes/" + cola + "-" + cabeza + "h.png";
         this.setIcon(new ImageIcon(getClass().getResource(this.rutaFicha)));
     }
     
     public void imagenBotonVertical(int cola, int cabeza) {
-        this.rutaFicha = "/Imagenes/" + cola + "-" + cabeza + "(v).jpg";
+        this.rutaFicha = "/Imagenes/" + cola + "-" + cabeza + "v.png";
         this.setIcon(new ImageIcon(getClass().getResource(this.rutaFicha)));
     }
 
@@ -109,10 +121,6 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
         this.posicion = new Point(x, y);
         super.setLocation(this.posicion);
     }
-//    public void posiocion(){
-//        this.posicion = new Point(this.x,this.y);
-//        this.setLocation( this.posicion );        
-//    }
 
     public int getX() {
         return this.x;
@@ -172,12 +180,15 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
         int k = mst.buscarBoton(this.getName(), Domino.listaFichaHumano);
         if (MiSistema.turno == 1) {
 
-            if (Domino.listaTablero.size() == 0) {//Si no han puesto Fichas
+            if (Domino.listaTablero.size() == 0 && nuevo_Y < 420) {//Si no han puesto Fichas
                 if (this.cabeza == MiSistema.parSalida && MiSistema.parSalida == this.cola) {
                     Principal.tablero.remove(Domino.listaFichaHumano.get(k));
                     Domino.listaFichaHumano = mst.addFichaTablero(k, true,Domino.listaFichaHumano);//Añade Ficha al listaTablero
+                }else{
+                    System.out.println(MiSistema.parSalida);
+                    JOptionPane.showMessageDialog(this, "¿TIENES LA FICHA?", "EMPEZAR",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("C:\\Users\\Brayan\\Documents\\GitHub\\Domino\\Domino\\src\\Imagenes/" + MiSistema.parSalida + "-" + MiSistema.parSalida + "v.png"));
                 }
-            } else if (nuevo_Y < 800) {//Poner Ficha
+            } else if (nuevo_Y < 420) {//Poner Ficha
 
                 if (nuevo_X < 1000) {//Pone la Ficha cola
                     if (this.cola == Domino.listaTablero.get(0).getCola()) {

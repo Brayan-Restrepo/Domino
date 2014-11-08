@@ -61,28 +61,29 @@ public class Principal extends javax.swing.JFrame {
 
         tablero.setBackground(new java.awt.Color(204, 204, 255));
         tablero.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tablero.setPreferredSize(new java.awt.Dimension(2000, 1000));
+        tablero.setPreferredSize(new java.awt.Dimension(2000, 570));
 
         javax.swing.GroupLayout tableroLayout = new javax.swing.GroupLayout(tablero);
         tablero.setLayout(tableroLayout);
         tableroLayout.setHorizontalGroup(
             tableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tableroLayout.createSequentialGroup()
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1998, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         tableroLayout.setVerticalGroup(
             tableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tableroLayout.createSequentialGroup()
-                .addGap(393, 393, 393)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tableroLayout.createSequentialGroup()
+                .addContainerGap(533, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(595, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
 
         jScrollPane1.setViewportView(tablero);
         tablero.getAccessibleContext().setAccessibleDescription("");
 
         jButton2.setText("Coger Ficha");
+        jButton2.setBorder(jButton1.getBorder());
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -110,7 +111,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(506, 506, 506)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,7 +119,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -144,8 +145,6 @@ public class Principal extends javax.swing.JFrame {
         d.crearDomino();
         d.barajarFicha();
         d.repartirFichas();
-        System.out.println("Lista Fichas de PC");
-        d.imprimirLista(Domino.listaFichaPc);
         this.ms.colocarFichaHumano();
         this.tablero.repaint();
         System.out.println("Turno: "+MiSistema.turno);
@@ -171,6 +170,7 @@ public class Principal extends javax.swing.JFrame {
             }
             this.pasar=true;
         }
+            Domino.imprimirLista(Domino.listaFichaHumano);
             MiSistema.parSalida--;
             r.jugar();
     }//GEN-LAST:event_jButton2ActionPerformed

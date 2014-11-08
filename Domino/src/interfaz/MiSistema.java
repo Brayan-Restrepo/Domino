@@ -33,11 +33,11 @@ public class MiSistema {
      */
     public void colocarFichaHumano(){
         Principal.tablero.removeAll();
-        Principal.jSeparator1.setLocation(0, 800);
+        Principal.jSeparator1.setLocation(0, 420);
         Principal.tablero.add(Principal.jSeparator1);
         int k=10;
         for (int i = 0; i < Domino.listaFichaHumano.size(); i++) {
-            Domino.listaFichaHumano.get(i).posiocion(k, 850);
+            Domino.listaFichaHumano.get(i).posiocion(k, 433);
             Principal.tablero.add(Domino.listaFichaHumano.get(i));
             k+=90;
         }        
@@ -100,23 +100,23 @@ public class MiSistema {
      * mapa de Juego
      */
     public void colocarFichaTablero(){
-        int centro = 1000+(145*Domino.listaTablero.get(0).getNivel());
+        int centro = 1000+(124*Domino.listaTablero.get(0).getNivel());
         for (int i = 0; i < Domino.listaTablero.size(); i++) {
             Principal.tablero.remove(Domino.listaTablero.get(i));
             int cabeza = Domino.listaTablero.get(i).getCabeza();
             int cola = Domino.listaTablero.get(i).getCola();
-            if(cabeza!=cola){
+            if(cabeza!=cola){//NO es par
                 Domino.listaTablero.get(i).imagenBotonHorizontal(cola,cabeza);
-                Domino.listaTablero.get(i).setSize(145,85);
-                Domino.listaTablero.get(i).posiocion(centro, 500);
+                Domino.listaTablero.get(i).setSize(124,62);
+                Domino.listaTablero.get(i).posiocion(centro, 179);
                 Principal.tablero.add(Domino.listaTablero.get(i));
-                centro+=145;
-            }else{
+                centro+=124;
+            }else{//Sii es par
                 Domino.listaTablero.get(i).imagenBotonVertical(cola,cabeza);
-                Domino.listaTablero.get(i).setSize(85,145);
-                Domino.listaTablero.get(i).posiocion(centro, 465);
+                Domino.listaTablero.get(i).setSize(62,124);
+                Domino.listaTablero.get(i).posiocion(centro, 148);
                 Principal.tablero.add(Domino.listaTablero.get(i));
-                centro+=85;
+                centro+=62;
             }
         }
     }

@@ -28,12 +28,6 @@ public class Domino {
      * @vercion 1.0 13/10/2014
      */
     public Domino() {
-        /*
-        this.listaFicha = new ArrayList<Ficha>();
-        this.listaFichaHumano = new ArrayList<Ficha>();
-        this.listaFichaPc = new ArrayList<Ficha>();
-        this.listaTablero = new ArrayList<Ficha>();
-        */
         this.turno=0;
         this.fichasBarajadas = new int[28];
 
@@ -59,9 +53,9 @@ public class Domino {
      * Ficha
      * @param lista
      */
-    public void imprimirLista(ArrayList<BotonFicha> lista) {
+    public static void imprimirLista(ArrayList<BotonFicha> lista) {
         for (int i = 0; i < lista.size(); i++) {
-            System.out.println(i+")  "+lista.get(i).getCabeza() + " - " + lista.get(i).getCola());
+            System.out.println((i+1)+")  "+lista.get(i).getCabeza() + " - " + lista.get(i).getCola()+" Prioridad: "+lista.get(i).getPrioridad());
         }
     }
 
@@ -115,7 +109,7 @@ public class Domino {
             int tlh = Domino.listaFichaHumano.size();
             if(tlh!=1){
                 int x = Domino.listaFichaHumano.get(tlh-2).getX() + 90;
-                Domino.listaFichaHumano.get(tlh-1).posiocion(x, 850);
+                Domino.listaFichaHumano.get(tlh-1).posiocion(x, 433);
             }
         }
         
@@ -129,9 +123,7 @@ public class Domino {
         aux = this.ordenarDesc(aux);
         
         //Eliminar las fichas repartidas
-        System.out.println("Fichas a eliminar");
         for (int i = 0; i < 14; i++) {
-            System.out.println(aux[i]);
             this.listaFicha.remove(aux[i]);
         }
     }
@@ -179,7 +171,7 @@ public class Domino {
             if(humano){
                 int x = Domino.listaFichaHumano.get(Domino.listaFichaHumano.size()-1).getX();
                 Domino.listaFichaHumano.add(Domino.listaFicha.get(n));
-                Domino.listaFichaHumano.get(Domino.listaFichaHumano.size()-1).posiocion(x+90, 850);
+                Domino.listaFichaHumano.get(Domino.listaFichaHumano.size()-1).posiocion(x+90, 433);
             }else{
                 Domino.listaFichaPc.add(Domino.listaFicha.get(n));
             }
@@ -199,27 +191,6 @@ public class Domino {
      */
     public static void main(String[] args) {
         Domino d = new Domino();
-//        Scanner s = new Scanner(System.in);
-//        d.barajarFicha();
-//        d.repartirFichas();
-//        do {
-//            System.out.println("Humano presione el numero de ficha que desea Poner: ");
-//            d.imprimirLista(Domino.listaFichaHumano);
-//            int ficha = s.nextInt();
-//            Domino.listaTablero.add(new Ficha(Domino.listaFichaHumano.get(ficha).getCabeza(),Domino.listaFichaHumano.get(ficha).getCola()));
-//            Domino.listaFichaHumano.remove(ficha);
-//            System.out.println("Lista Tablero");
-//            d.imprimirLista(Domino.listaTablero);
-//            
-//            System.out.println("PC presione el numero de ficha que desea Poner: ");
-//            d.imprimirLista(Domino.listaFichaPc);
-//            int fichaPC = s.nextInt();
-//            Domino.listaTablero.add(new Ficha(Domino.listaFichaPc.get(fichaPC).getCabeza(),Domino.listaFichaPc.get(fichaPC).getCola()));
-//            Domino.listaFichaPc.remove(fichaPC);
-//            System.out.println("Lista Tablero");
-//            d.imprimirLista(Domino.listaTablero);
-//        } while (true);
-        
         
         d.crearDomino();
         d.barajarFicha();
