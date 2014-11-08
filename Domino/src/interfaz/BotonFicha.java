@@ -13,6 +13,8 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -184,9 +186,6 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
                 if (this.cabeza == MiSistema.parSalida && MiSistema.parSalida == this.cola) {
                     Principal.tablero.remove(Domino.listaFichaHumano.get(k));
                     Domino.listaFichaHumano = mst.addFichaTablero(k, true,Domino.listaFichaHumano);//Añade Ficha al listaTablero
-                }else{
-                    System.out.println(MiSistema.parSalida);
-                    JOptionPane.showMessageDialog(this, "¿TIENES LA FICHA?", "EMPEZAR",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("C:\\Users\\Brayan\\Documents\\GitHub\\Domino\\Domino\\src\\Imagenes/" + MiSistema.parSalida + "-" + MiSistema.parSalida + "v.png"));
                 }
             } else if (nuevo_Y < 420) {//Poner Ficha
 
@@ -222,6 +221,11 @@ public class BotonFicha extends JButton implements MouseListener, MouseMotionLis
         if (Domino.listaFichaHumano.size()==0) {
             JOptionPane.showMessageDialog(null, "Gano Humano");
         }else{
+//            try {
+//                    Thread.sleep(3000);
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+//                }
             r.jugar();
         }
     }

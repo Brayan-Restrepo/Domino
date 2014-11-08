@@ -7,7 +7,11 @@ package domino;
 
 import interfaz.BotonFicha;
 import interfaz.MiSistema;
+import interfaz.Principal;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +24,8 @@ public class Reglas {
 
     public void jugar() {
         if (MiSistema.turno == 0) {
+            
+            
             if (Domino.listaTablero.size() == 0) {//De de tirar un par
                 this.empezarDoble();
             } else {
@@ -30,6 +36,9 @@ public class Reglas {
             mst.colocarFichaTablero();
         }
         MiSistema.turno = 1;
+        if(Domino.listaTablero.size() == 0 && MiSistema.turno == 1){
+            JOptionPane.showMessageDialog(null, "¿TIENES LA FICHA?", "EMPEZAR",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("F:\\Domino\\Domino\\src\\Imagenes/" + MiSistema.parSalida + "-" + MiSistema.parSalida + "v.png"));
+        }
     }
 
     /**
@@ -101,7 +110,11 @@ public class Reglas {
             for (int i = 0; i < Domino.listaFichaPc.size(); i++) {
                 if (Domino.listaFichaPc.get(i).getCabeza() == cabeza || Domino.listaFichaPc.get(i).getCola() == cabeza
                         || Domino.listaFichaPc.get(i).getCabeza() == cola || Domino.listaFichaPc.get(i).getCola() == cola) {
-                    Domino.listaFichaPc.get(i).setPrioridad(Domino.listaFichaPc.get(i).getCabeza() + Domino.listaFichaPc.get(i).getCola());
+                    if (Domino.listaFichaPc.get(i).getCabeza()==Domino.listaFichaPc.get(i).getCola()) {
+                        Domino.listaFichaPc.get(i).setPrioridad(Domino.listaFichaPc.get(i).getCabeza() + Domino.listaFichaPc.get(i).getCola()+10);//Si es par tiene una prioridad de +10
+                    }else{
+                        Domino.listaFichaPc.get(i).setPrioridad(Domino.listaFichaPc.get(i).getCabeza() + Domino.listaFichaPc.get(i).getCola());
+                    }
                     if (prioridadMayor < Domino.listaFichaPc.get(i).getPrioridad()) {
                         prioridadMayor = Domino.listaFichaPc.get(i).getPrioridad();
                         IMayor = i;
@@ -115,6 +128,7 @@ public class Reglas {
             }
             System.out.println("Lista PC");
             Domino.imprimirLista(Domino.listaFichaPc);
+            
             if(IMayor == -1){
                 Domino.robarFicha(false);
                 continue;

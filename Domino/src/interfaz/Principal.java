@@ -7,6 +7,10 @@ package interfaz;
 
 import domino.Domino;
 import domino.Reglas;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -82,7 +86,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablero);
         tablero.getAccessibleContext().setAccessibleDescription("");
 
-        jButton2.setText("Coger Ficha");
+        jButton2.setText("PASAR");
         jButton2.setBorder(jButton1.getBorder());
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,9 +174,12 @@ public class Principal extends javax.swing.JFrame {
             }
             this.pasar=true;
         }
+        System.out.println("Lista Fichas HUMANO");
             Domino.imprimirLista(Domino.listaFichaHumano);
             MiSistema.parSalida--;
+            
             r.jugar();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

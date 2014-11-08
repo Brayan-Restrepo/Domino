@@ -151,7 +151,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Coger Ficha"/>
+        <Property name="text" type="java.lang.String" value="PASAR"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection component="jButton1" name="border" type="property"/>
         </Property>
